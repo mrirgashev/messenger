@@ -27,7 +27,7 @@
     height: 100vh;
     margin-left: -250px;
     overflow-y: scroll;
-    background: #000;
+    background: black;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -44,7 +44,8 @@
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 100vh;
+    /* height: 100vh; */
+    height: calc(100vh - 40px);
  }
  
  .xyz {
@@ -75,8 +76,8 @@
    height: 40px;
    width: 100%;
    color: white;
-   font-size: 18px;
-   background-color: #000;
+   font-size: 16px;
+   background-color: black;
    /* padding-bottom: 10px; */
  }
  .sidebar-nav li {
@@ -97,7 +98,7 @@
     text-decoration: none;
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
-    border-left: red 2px solid;
+    border-left: rgb(123, 159, 155) 2px solid;
  }
  
  .sidebar-nav li a:active,
@@ -124,6 +125,81 @@
     margin: 0;
  }
  
+
+
+.sms {
+   position: fixed;
+   width: calc(100% - 300px);
+   bottom: 10px;
+   left: 260px;
+   height: 40px;
+   font-size: 17px;
+   border: 1.5px solid black;
+   border-radius: 13px;
+   padding-left: 10px;
+}
+
+
+
+.send {
+   position: fixed;
+   width: 50px;
+   bottom: 13;
+   /* background-color: cadetblue; */
+   right: 0;
+   img {
+      width: 35px;
+      margin-left: 3px;
+   }
+}
+
+.messages {
+   display: flex;
+   flex-direction: column;
+}
+
+.message {
+   max-width: 60%;
+   padding: 10px;
+   margin: 5px 0;
+   border-radius: 10px;
+
+   p {
+      font-size: 17px;
+   }
+   small {
+      font-size: 10px;
+   }
+}
+
+.my-message {
+   align-self: flex-end;
+   background-color: #536c6e3e;
+   backdrop-filter: blur(15px);
+}
+
+.other-message {
+   align-self: flex-start;
+   background-color: #8ccec879;
+   backdrop-filter: blur(15px);
+
+}
+
+.it-is {
+   text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border-left: rgb(89, 131, 138) 2px solid;
+}
+
+
+
+
+
+
+
+
+
  @media (min-width: 768px) {
     #wrapper {
        padding-left: 250px;

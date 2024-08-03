@@ -46,9 +46,9 @@
               </form>
           </li>
             {% for user in users %}
-                {% if current_user != user %}
-                    <li class="indent">
-                        <a href="{% url 'messeneger:chat' receiver_id=user.id %}">
+                {% if current_user != user and user.name in user_chat %}
+                    <li class="indent ">
+                        <a href="{% url 'messeneger:chat' receiver_id=user.id %}" class="{% if user.username == receiver.username %}it-is{% endif %}">
                             <span class="fa-stack fa-lg pull-left">
                                 <i class="fa fa-cloud-download fa-stack-1x "></i>
                             </span>{{ user.username }}
@@ -68,19 +68,18 @@
                <div class="messages">
                   {% if messages %}
                     {% for message in messages %}
-                        <div class="message">
-                            <strong>{{ message.sender.username }}:</strong>
+                        <div class="message {% if message.sender == user %}my-message{% else %}other-message{% endif %}">
+                            <!-- <strong>{{ message.sender.username }}:</strong> -->
                             <p>{{ message.messege }}</p>
                             <small>{{ message.timestamp }}</small>
                         </div>
                     {% endfor %}
                   {% endif %}
                 </div>
-               <h1>Chat with {{ receiver.username }}</h1>
-               <form method="post">
+               <form method="post" class="form">
                   {% csrf_token %}
-                  <input type="text" name="messege" id="{{ form.messege.id_for_label }}" accept="text" placeholder="Write anything">
-                  <button type="submit">Send</button>
+                  <input class="sms" type="text" name="messege" id="{{ form.messege.id_for_label }}" accept="text" placeholder="Write anything">
+                  <button class="send" type="submit"><img src="{% static 'images/send.png' %}" alt=""></button>
               </form>
             </div>
           </div>

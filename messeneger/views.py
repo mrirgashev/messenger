@@ -11,6 +11,10 @@ def home(request):
     users = User.objects.all()  
     current_user = request.user
     search = request.GET.get('search', '')
+
+    
+
+
     if search:
         search_results = users.filter(
             Q(username__icontains=search) 
@@ -27,11 +31,13 @@ def home(request):
 
 @login_required
 def chat(request, receiver_id):
-    # Get the receiver user
+
     receiver = User.objects.get(id=receiver_id)
-    # Get the sender user (current logged-in user)
+
     sender = request.user
     users = User.objects.all()  
+
+
 
     if request.method == 'POST':
         form = MessageForm(request.POST)
@@ -40,7 +46,7 @@ def chat(request, receiver_id):
             message.sender = sender
             message.receiver = receiver
             message.save()
-            return redirect('messeneger:chat', receiver_id=receiver_id)  # Use receiver_id, not the receiver object
+            return redirect('messeneger:chat', receiver_id=receiver_id)  
     else:
         form = MessageForm()
 
@@ -50,11 +56,12 @@ def chat(request, receiver_id):
         (Q(sender=receiver) & Q(receiver=sender))
     ).order_by('timestamp')
 
+
     context = {
         'receiver': receiver,
         'messages': messages,
         'form': form,
         'users': users,
-        'current_user': request.user,  # Include the current user in the context for the template to display their username in the navbar.  # Use receiver_id, not the receiver object.  # Include the current user in the context for the template to display their username in the navbar.  # Use receiver_id, not the receiver object.  # Include the current user in the context for the template to display their username in the navbar.
+        'current_user': request.user, 
     }
     return render(request, 'chat.html', context)
