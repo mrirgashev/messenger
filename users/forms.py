@@ -6,16 +6,33 @@ from messeneger.bulma_mixin import BulmaMixin
 
 class SignUpForm(BulmaMixin, UserCreationForm):
     username = forms.CharField()
-
-    email = forms.CharField()
-
-    password1 = forms.PasswordInput()
-
-    password2 = forms.PasswordInput()
+    email = forms.EmailField()
+    password1 = forms.CharField(widget=forms.PasswordInput())
+    password2 = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Username is already taken.")
+        return username
+
+
+# class SignUpForm(BulmaMixin, UserCreationForm):
+#     username = forms.CharField()
+
+#     email = forms.CharField()
+
+#     password1 = forms.PasswordInput()
+
+#     password2 = forms.PasswordInput()
+
+#     class Meta:
+#         model = User
+#         fields = ('username', 'email', 'password1', 'password2')
 
 
 class SignInForm(BulmaMixin, AuthenticationForm):

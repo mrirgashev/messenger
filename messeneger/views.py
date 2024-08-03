@@ -12,8 +12,6 @@ def home(request):
     current_user = request.user
     search = request.GET.get('search', '')
 
-    
-
 
     if search:
         search_results = users.filter(
@@ -21,7 +19,7 @@ def home(request):
         )
         if not search_results.exists():
             search_results = users
-        users = search_results
+        users = search_results 
 
     return render(request, 'home.html', {
         'users': users,

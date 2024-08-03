@@ -42,11 +42,11 @@
           <li class="search">
              <!-- <a href="#"><input type="text" name="search" id="search"></a> -->
              <form action="{% url 'messeneger:home' %}" method="get">
-                <input id="search" type="search" placeholder="Поиск..." name="search">
+                <input id="search" type="search" placeholder="Search user ..." name="search">
               </form>
           </li>
             {% for user in users %}
-                {% if current_user != user and user.name in user_chat %}
+                {% if current_user != user%}
                     <li class="indent ">
                         <a href="{% url 'messeneger:chat' receiver_id=user.id %}" class="{% if user.username == receiver.username %}it-is{% endif %}">
                             <span class="fa-stack fa-lg pull-left">
@@ -54,9 +54,17 @@
                             </span>{{ user.username }}
                         </a>
                     </li>
+                  {% else %}
+                    <li class="indent">
+                       <a href="{% url 'messeneger:chat' receiver_id=user.id %}">
+                          <span class="fa-stack fa-lg pull-left">
+                             <i class="fa fa-cloud-download fa-stack-1x "></i>
+                          </span>Saved
+                       </a>
+                 </li>
                 {% endif %}
             {% endfor %}
-          
+            <!-- and user.name in user_chat  -->
        </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -87,13 +95,6 @@
     </div>
  </div>
 
-<div class="container">
-    <div class="columns">
-        <ul>
-            
-        </ul>
-    </div>
-</div>
 <script>
     $("#menu-toggle").click(function(e) {
    e.preventDefault();
