@@ -11,7 +11,12 @@
     <link rel="stylesheet" href="{% static 'bulma.css' %}">
 </head>
 <body>
-{% block content %}
-{% endblock %}
+    {% if user.is_authenticated %}
+        {% block content %}
+        {% endblock %}    
+    {% else %} 
+        {% block auth %}
+        {% endblock %}
+    {% endif %} 
 </body>
 </html>
