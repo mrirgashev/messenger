@@ -2,20 +2,49 @@
 {% load static %}
 {% block content %}
 
+{% comment %} <h1>Chat with {{ receiver.username }}</h1>
+    
+    <div class="messages">
+      {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                <strong>{{ message.sender.username }}:</strong>
+                <p>{{ message.messege }}</p>
+                <small>{{ message.timestamp }}</small>
+            </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send</button>
+    </form> {% endcomment %}
+
+<!-- <nav class="navbar navbar-default no-margin">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="nav navbar-nav">
+          <li class="active">
+             <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+             </button>
+          </li>
+       </ul>
+    </div>
+
+ </nav> -->
+
  <div id="wrapper">
+    <!-- Sidebar -->
     <div id="sidebar-wrapper">
         
        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
           <li class="search">
+             <!-- <a href="#"><input type="text" name="search" id="search"></a> -->
              <form action="{% url 'messeneger:home' %}" method="get">
                 <input id="search" type="search" placeholder="Поиск..." name="search">
               </form>
           </li>
-            <!-- {% for user in users %}
-                <li class="indent">
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>{{ user.username }} </a>
-                 </li>
-            {% endfor %} -->
             {% for user in users %}
                 {% if current_user != user %}
                     <li class="indent">
@@ -27,6 +56,7 @@
                     </li>
                 {% endif %}
             {% endfor %}
+          
        </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -34,10 +64,25 @@
     <div id="page-content-wrapper">
        <div class="container-fluid xyz">
           <div class="row">
-             <div class="col-lg-12">
-                <h1>Simple Admin Sidebar With Bootstrap by</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident laudantium nobis cum dignissimos ex inventore, velit blanditiis. Quod laborum soluta quidem culpa officia eligendi, quam, recusandae iste aliquid amet odit! </p>
-             </div>
+            <div class="col-lg-12">
+               <div class="messages">
+                  {% if messages %}
+                    {% for message in messages %}
+                        <div class="message">
+                            <strong>{{ message.sender.username }}:</strong>
+                            <p>{{ message.messege }}</p>
+                            <small>{{ message.timestamp }}</small>
+                        </div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+               <h1>Chat with {{ receiver.username }}</h1>
+               <form method="post">
+                  {% csrf_token %}
+                  <input type="text" name="messege" id="{{ form.messege.id_for_label }}" accept="text" placeholder="Write anything">
+                  <button type="submit">Send</button>
+              </form>
+            </div>
           </div>
        </div>
     </div>
@@ -82,6 +127,6 @@ function initMenu() {
 $(document).ready(function() {
    initMenu();
 });
-</script>
+</script> 
 
 {% endblock %}
