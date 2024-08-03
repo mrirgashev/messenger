@@ -1,0 +1,61 @@
+{% extends 'base_layout.html' %}
+
+{% block auth %}
+   <div class="columns is-centered" style="margin-top: 8%">
+       <div class="column is-4">
+           <div class="box" style="background: rgba(2,86,94,0.78)">
+               <form class="form  has-text-centered" method="post">
+                   {% csrf_token %}
+                        <h1 class="has-text-centered is-size-2 has-text-white has-text-bold"><b>Edit profile</b></h1>
+                        <div class="field">
+                            <hr class="has-background-grey-lighter">
+                            <input class="input is-rounded" type="text" name="firs_name" id="{{ form.first_name.id_for_label }}" placeholder="First name">
+                        </div><hr class="has-background-grey-lighter">
+                        <div class="field">
+                            <input class="input is-rounded" type="text" name="last_name" id="{{ form.last_name.id_for_label }}" placeholder="Last name">
+                        </div>
+                   <hr class="has-background-grey-lighter">
+                        <div class="field ">
+                            <input class="input is-rounded" type="text" name="username" id="{{ form.username.id_for_label }}" placeholder="User name">
+                        </div>
+                   <hr class="has-background-grey-lighter">
+                        <div class="field ">
+                            <input class="input is-rounded" type="text" name="email" id="{{ form.email.id_for_label }}" placeholder="Email">
+                        </div>
+                   <hr class="has-background-grey-lighter">
+                        <button type="submit" class="button is-primary  is-fullwidth is-light is-outlined">Submit</button>
+               </form>
+           </div>
+       </div>
+   </div>
+    <style>
+        .input {
+            background-color: rgba(251, 255, 254, 0.81);
+        }
+    </style>
+{% endblock %}
+
+
+{#{% extends 'base_layout.html' %}#}
+{##}
+{#{% block auth %}#}
+{#    <div class="columns is-centered">#}
+{#        <div class="column is-4">#}
+{#            <div class="box has-background-info-light">#}
+{#                <form class="form  has-text-centered" method="post" enctype="multipart/form-data">#}
+{#                    <h1 class="title is-size-2 has-text-centered">Edit profile</h1>#}
+{#                    {% csrf_token %}#}
+{#                    {% for field in form %}#}
+{#                        <div class="field">#}
+{#                            <label for="{{ field.id_for_label }}" class="label">{{ field.label }}</label>#}
+{#                            {{ field }}#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                    <button type="submit" class="button is-primary is-fullwidth">#}
+{#                        Submit#}
+{#                    </button>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

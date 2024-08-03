@@ -1,0 +1,45 @@
+    {% extends 'base_layout.html' %}
+
+    {% block auth %}
+        <div class="columns is-centered" style="margin-top: 6%">
+            <div class="column is-4">
+                <div class="box" style="background: rgba(2,86,94,0.78)">
+                    <form class="form  has-text-centered" method="post">
+                        {% csrf_token %}
+                        <h1 class="has-text-centered has-text-white is-size-3 has-text-bold"><b>Log in</b></h1>
+                        <div class="field add_category_input">
+                            <hr>
+                            <input class="input input_expense is-rounded" type="text" name="username" id="{{ form.username.id_for_label }}" placeholder="User name">
+                        </div><hr>
+                        <div class="field add_category_input">
+                            <input class="input input_expense is-rounded" type="password" name="password" id="{{ form.password.id_for_label }}" placeholder="Password">
+                        </div>
+                        <hr>
+                        <button type="submit" class="button is-primary is-fullwidth is-light is-outlined">Submit</button>
+{#                        <h1 class="title is-size-2 has-text-centered">Sign in</h1>#}
+{#                        {% csrf_token %}#}
+{#                        {% for field in form %}#}
+{#                            <div class="field">#}
+{#                                <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>#}
+{#                                {{ field }}#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                        <button type="submit" class="button is-primary is-fullwidth">#}
+{#                            Submit#}
+{#                        </button>#}
+                        <p class="content mt-3 has-text-white">
+                            If you don't have an account
+                            <a href="{% url 'users:sign_up' %}" class="has-text-primary"> Sign up here</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <style>
+        .input {
+            background-color: rgba(251, 255, 254, 0.81);
+        }
+        </style>
+    {% endblock %}
+
+

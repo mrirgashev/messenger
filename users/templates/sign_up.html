@@ -1,0 +1,68 @@
+{% extends 'base_layout.html' %}
+
+{% block auth %}
+   <div class="columns is-centered" >
+       <div class="column is-4">
+           <div class="box" style="background: rgba(2,86,94,0.78)">
+               <form class="form  has-text-centered" method="post">
+                   {% csrf_token %}
+                        <h1 class="has-text-centered is-size-2 has-text-white has-text-bold"><b>Sign up</b></h1>
+                        <div class="field">
+                            <hr class="has-background-grey-lighter">
+                            <input class="input is-rounded" type="text" name="username" id="{{ form.username.id_for_label }}" placeholder="User name">
+                        </div><hr class="has-background-grey-lighter">
+                        <div class="field">
+                            <input class="input is-rounded" type="text" name="email" id="{{ form.email.id_for_label }}" placeholder="Email">
+                        </div>
+                   <hr class="has-background-grey-lighter">
+                        <div class="field ">
+                            <input class="input is-rounded" type="password" name="password1" id="{{ form.password1.id_for_label }}" placeholder="Password">
+                        </div>
+                   <hr class="has-background-grey-lighter">
+                        <div class="field">
+                            <input class="input is-rounded" type="password" name="password2" id="{{ form.password2.id_for_label }}" placeholder="Repeat your password">
+                        </div>
+                        <hr class="has-background-grey-lighter">
+                        <button type="submit" class="button is-primary  is-fullwidth is-light is-outlined">Submit</button>
+                   <hr class="has-background-grey-lighter">
+               </form>
+               <div class="password-generator">
+                    <input type="text" id="generated-password" class="input is-rounded has-text-centered" readonly  placeholder="Click the button below to generate password"><br>
+                   <button class="button is-primary has-background-primary-soft is-fullwidth is-light is-outlined mt-3" onclick="generatePassword()">Generate Password</button>
+                </div>
+               <hr>
+               <p class="has-text-white has-text-centered">If you have an account
+               <a href="{% url 'users:sign_in' %}" class="has-text-primary">
+                       Login please
+               </a>
+               </p>
+
+           </div>
+       </div>
+   </div>
+    <style>
+        .input {
+            background-color: rgba(251, 255, 254, 0.81);
+        }
+    </style>
+    <script>
+    // JavaScript функция для генерации пароля
+    function generatePassword() {
+        // Строка, содержащая все возможные символы для пароля
+        var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,.:;?/}{][!@#$%&*()_";
+        var passwordLength = 12; // Длина пароля
+        var password = ""; // Инициализация пустой строки для пароля
+
+        // Генерация пароля
+        for (var i = 0; i < passwordLength; i++) {
+            var randomIndex = Math.floor(Math.random() * chars.length);
+            password += chars[randomIndex]; // Добавляем случайный символ к паролю
+        }
+
+        // Вставляем сгенерированный пароль в текстовое поле
+        document.getElementById('generated-password').value = password;
+    }
+</script>
+{% endblock %}
+
+
