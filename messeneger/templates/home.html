@@ -2,6 +2,86 @@
 {% load static %}
 {% block content %}
 
-<p> hello world</p>
+<!-- <nav class="navbar navbar-default no-margin">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="nav navbar-nav">
+          <li class="active">
+             <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+             </button>
+          </li>
+       </ul>
+    </div>
+
+ </nav> -->
+ <div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        
+       <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+          <li class="search">
+             <a href="#"><input type="text" name="search" id="search"></a>
+          </li>
+            {% for user in users %}
+                <li class="indent">
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>{{ user.username }} </a>
+                 </li>
+            {% endfor %}
+          
+       </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+       <div class="container-fluid xyz">
+          <div class="row">
+             <div class="col-lg-12">
+                <h1>Simple Admin Sidebar With Bootstrap by</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident laudantium nobis cum dignissimos ex inventore, velit blanditiis. Quod laborum soluta quidem culpa officia eligendi, quam, recusandae iste aliquid amet odit! </p>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+<div class="container">
+    <div class="columns">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+<script>
+    $("#menu-toggle").click(function(e) {
+   e.preventDefault();
+   $("#wrapper").toggleClass("toggled");
+});
+$("#menu-toggle-2").click(function(e) {
+   e.preventDefault();
+   $("#wrapper").toggleClass("toggled-2");
+   $('#menu ul').hide();
+});
+
+function initMenu() {
+   $('#menu ul').hide();
+   $('#menu ul').children('.current').parent().show();
+   //$('#menu ul:first').show();
+   $('#menu li a').click(
+      function() {
+         var checkElement = $(this).next();
+         if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+            return false;
+         }
+         if ((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+            $('#menu ul:visible').slideUp('normal');
+            checkElement.slideDown('normal');
+            return false;
+         }
+      }
+   );
+}
+$(document).ready(function() {
+   initMenu();
+});
+</script>
 
 {% endblock %}
